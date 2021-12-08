@@ -1,15 +1,15 @@
 var readlineSync = require("readline-sync");
 
-console.log("ZombieX");
+console.log("Zombie Game");
 console.log("---  ---");
-let user = readlineSync.question("What will your username be? ");
+let user = readlineSync.question("What will your name be? ");
 console.log("---  ---");
-console.log(` ${user} will you survive the game?`);
+console.log(` ${user} will you survive?`);
 console.log("-- Decision's --");
 
 let isAlive = true;
 let inv = [];
-let userHP = 100;
+let userHP = 40;
 
 let mainMenu = () => {
     let walk = readlineSync.keyIn(`w: Walk Forward: \nP: Stats: `);
@@ -35,15 +35,15 @@ let spawnEnemy = () => {
     if (x < 0.3) {
         spawnZombieDog();
     } else if (x < 0.6) {
-        spawnTwistedZombie();
+        spawnZombie();
     } else if (x > 0.6) {
-        spawnHulkingZombie();
+        spawnRadioActiveZombie();
     }
 };
 let spawnZombieDog = () => {
     console.log(`Flesh eating dog appeared!`);
     console.log("-----------");
-    let x = 40;
+    let x = 20;
     while (isAlive == true) {
         let zombieAtk = Math.floor(Math.random() * 5 + 1);
         let pAtk = Math.floor(Math.random() * 15 + 1);
@@ -92,10 +92,10 @@ let spawnZombieDog = () => {
     }
 };
 
-let spawnTwistedZombie = () => {
-    console.log(`Twisted Zombie appeared and ready to attack!`);
+let spawnZombie = () => {
+    console.log(`Zombie appeared and ready to attack!`);
     console.log("----------");
-    let x = 60;
+    let x = 30;
     while (isAlive == true) {
         let zombieAtk = Math.floor(Math.random() * 8 + 1);
         let pAtk = Math.floor(Math.random() * 15 + 1);
@@ -115,9 +115,7 @@ let spawnTwistedZombie = () => {
             );
             if (choice == 1) {
                 x -= pAtk;
-                console.log(
-                    `Twisted Zombie took ${pAtk} damage! HP is now: ` + x
-                );
+                console.log(`Zombie took ${pAtk} damage! HP is now: ` + x);
                 userHP -= zombieAtk;
                 console.log(
                     `${user} took ${zombieAtk} damage! HP is now: ` + userHP
@@ -130,9 +128,7 @@ let spawnTwistedZombie = () => {
                     mainMenu();
                     break;
                 } else {
-                    console.log(
-                        `As you try to flee the Twisted Zombie grabs you with all 4 arms!`
-                    );
+                    console.log(`Zombie grabs you!`);
                 }
             } else if (choice == `p`) {
                 console.log(`${user}: HP:${userHP} \nInventory: ${inv}`);
@@ -143,10 +139,10 @@ let spawnTwistedZombie = () => {
     }
 };
 
-let spawnHulkingZombie = () => {
-    console.log(`A HULKING ZOMBIE HAS BEGUN TO CHARGE AT YOU!!`);
+let spawnRadioActiveZombie = () => {
+    console.log(`THE RADIO ACTIVE ZOMBIE HAS BEGUN TO CHARGE AT YOU!!`);
     console.log("---------");
-    let x = 80;
+    let x = 45;
     while (isAlive == true) {
         let zombieAtk = Math.floor(Math.random() * 10 + 1);
         let pAtk = Math.floor(Math.random() * 15 + 1);
@@ -155,10 +151,10 @@ let spawnHulkingZombie = () => {
             isAlive = false;
         } else if (x <= 0) {
             console.log(
-                `You have defeated the HULKING ZOMBIE and have been awarded a Healing Orb (+5 HP).`
+                `You have defeated the Radio Active Zombie and have been awarded a Healing Orb (+20 HP).`
             );
             console.log("----------");
-            userHP += 5;
+            userHP += 20;
             mainMenu();
             break;
         } else if (userHP != 0 && x != 0) {
@@ -168,7 +164,7 @@ let spawnHulkingZombie = () => {
             if (choice == 1) {
                 x -= pAtk;
                 console.log(
-                    `Hulking Zombie took ${pAtk} damage! HP is now: ` + x
+                    `Radio Active Zombie took ${pAtk} damage! HP is now: ` + x
                 );
                 console.log("----------");
                 userHP -= zombieAtk;
@@ -184,14 +180,14 @@ let spawnHulkingZombie = () => {
                     break;
                 } else {
                     console.log(
-                        `The HULKING ZOMBIE grabs your leg as you try to flee...`
+                        `The Radio active Zombie grabs you as you try to flee...`
                     );
                 }
             } else if (choice == `p`) {
                 console.log(`${user}: HP:${userHP} \nInventory: ${inv}`);
             }
         } else {
-            console.log(`WTF`);
+            console.log(`URGH`);
         }
     }
 };
