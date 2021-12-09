@@ -1,6 +1,7 @@
 # NPM
 
-readline-sync project
+readline-sync project's
 
- calculator
- 
+ calculator.
+ Role Playing Game.
+ CapStone.
